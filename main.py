@@ -13,7 +13,9 @@ def inicio():
     """Essa função chama a tela inicial do programa"""
     print("Bem vindo a Locadora de Carros!")
     print("O que deseja fazer?")
-    print("0 - Mostrar Porifólio | 1 - Alugar um carro | 2 - Devolver um carro | 3 - Mostrar carros alugados " )
+    print("| 0 - Mostrar Porifólio | 1 - Alugar um carro |")
+    print("-----------------------------------------------")
+    print("| 2 - Devolver um carro | 3 - Mostrar carros alugados" )
 
 def escolhe_opcao() -> None:
     """Pede que o usuário escolha uma opção e chama a função correspondente"""
