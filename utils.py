@@ -13,14 +13,17 @@ carros_disponiveis = {
     "Fiat Pulse" : "R$ 130/dia"        
 }
 
+carros_alugados = {}
+
 def escolhe_carro() -> None:
     """Essa função permite que o usuário escolha um carro para alugar.
     A função irá validar a escolha do usuário e responder a sua solicitação."""
     escolha = input()
     try:
         escolha = int(escolha)
-        if escolha < 0 or escolha >= len(carros_disponiveis):
+        if escolha <= 0 or escolha >= len(carros_disponiveis):
             escolha_invalida()
+            return
         dias = int(input("Quantos dias você quer alugar este carro?\n"))
         chave = list(carros_disponiveis.keys())[escolha]
         valor_por_dia = list(carros_disponiveis.values())[escolha].split()[1]
@@ -44,7 +47,7 @@ def escolhe_carro() -> None:
 def escolha_invalida():
     """Essa função é chamada quando o usuário faz uma escolha inválida."""
     limpar_terminal()
-    print("Escolha inválida, tente novamente")
+    print("Escolha inválida, tente novamente.")
 
 def limpar_terminal() -> None:
     """Essa função limpa o terminal."""
