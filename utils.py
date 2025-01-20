@@ -15,39 +15,57 @@ carros_disponiveis = {
 
 carros_alugados = {}
 
+def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
+    """Percorre um dicionário do portifolio e imprime os carros disponíveis
+    
+    Args:
+        main_func (bool, optional): Se a função está
+        sendo chamada pelo menu principal. Padrão é False."""
+    if portifolio == "carros_alugados":
+        portifolio = carros_alugados
+    if portifolio == "carros_disponiveis":
+        portifolio = carros_disponiveis
+    limpar_terminal()
+    for indice, (carro, valor) in enumerate(portifolio.items()):
+        print(f"[{indice}] {carro} - {valor}")
+    if main_func:
+        input("Pressione enter para voltar")
+        limpar_terminal()
+
 def escolhe_carro_para_alugar() -> None:
-    """Essa função permite que o usuário escolha um carro para alugar.
-    A função irá validar a escolha do usuário e responder a sua solicitação."""
-    escolha = input()
+    """Essa função permite que o usuário escolha um carro para alugar."""
+    escolha = int(input("Escolha o código do carro\n"))
     try:
-        escolha = int(escolha)
-        if escolha <= 0 or escolha >= len(carros_disponiveis):
-            escolha_invalida()
+        if not valida_escolha_do_carro(escolha, carros_disponiveis):
             return
         dias = int(input("Quantos dias você quer alugar este carro?\n"))
-        if int(dias) <= 0:
-            escolha_invalida()
+        if not valida_dias_alugados(dias):
             return
-        chave = list(carros_disponiveis.keys())[escolha]
-        valor_por_dia = list(carros_disponiveis.values())[escolha].split()[1]
-        valor = int(valor_por_dia.split("/")[0])
-        print(f"Você escolheu {chave} por {dias} dias.")
-        print(f"O aluguel totalizaria R$ {valor * dias}.")
-        print("Deseja alugar?")
-        desistencia = input("0 - SIM | 1 - NÃO\n")
-        if desistencia not in ['0', '1']:
-            escolha_invalida()
-            return
-        if desistencia == '1':
+        chave, valor = obtem_info_do_carro(escolha, carros_disponiveis)
+        if cliente_confirmar(chave, dias, valor):
+            transfere_carro(carros_disponiveis, carros_alugados, chave)
             limpar_terminal()
-            return
-        carros_disponiveis.pop(chave, None)
-        limpar_terminal()
-        print(f"Parabéns você alugou o {chave} por {dias} dias.")
+            print(f"Parabéns você alugou o {chave} por {dias} dias.")
     except:
         escolha_invalida()
 
-def escolha_invalida():
+def escolhe_carro_para_devolver() -> None:
+    """"Essa função permite ao usuário escolher um carro para devolver."""
+    escolha = input("Escolha o codigo do carro para devolve-lo\n")
+    try:
+        escolha = int(escolha)
+        if not valida_escolha_do_carro(escolha, carros_alugados):
+            return
+        informacoes = obtem_info_do_carro(escolha, carros_alugados)
+        transfere_carro(carros_alugados, carros_disponiveis, informacoes[0])
+        limpar_terminal()
+        print(f"Obrigado por devolver o carro: {informacoes[0]}.")
+        input("Pressione enter para continuar.")
+        limpar_terminal()
+    except:
+        pass
+
+def escolha_invalida() -> None:
     """Essa função é chamada quando o usuário faz uma escolha inválida."""
     limpar_terminal()
     print("Escolha inválida, tente novamente.")
@@ -55,3 +73,80 @@ def escolha_invalida():
 def limpar_terminal() -> None:
     """Essa função limpa o terminal."""
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def valida_escolha_do_carro(escolha: int, portifolio: dict) -> bool:
+    """Valida a escolha do usuário para alugar um carro.
+
+    Args:
+        escolha (int): codigo do carro escolhido
+        portifolio (dict): dicionário de carros a ser escolhido
+
+    Returns:
+        bool: se o codigo escolhido é válido ou não
+    """
+    if escolha < 0 or escolha >= len(portifolio):
+        escolha_invalida()
+        return False
+    return True
+
+def valida_dias_alugados(dias: int) -> bool:
+    """Valida a quantidade de dias que o usuário deseja alugar um carro.
+
+    Args:
+        dias (int): quantidade de dias escolhidos
+
+    Returns:
+        bool: se a quantidade de dias é válida ou não
+    """
+    if dias <=0:
+        escolha_invalida()
+        return False
+    return True
+
+def obtem_info_do_carro(escolha: int, portifolio: dict) -> tuple:
+    """Obtém informações do carro escolhido pelo usuário.
+
+    Args:
+        escolha (int): código do carro escolhido
+        portifolio (dict): dicionário de carros a ser escolhido
+
+    Returns:
+        tuple: chave e valor do carro
+    """
+    chave = list(portifolio.keys())[escolha]
+    valor_por_dia = list(portifolio.values())[escolha].split()[1]
+    valor = int(valor_por_dia.split("/")[0])
+    return chave, valor
+
+def cliente_confirmar(chave: str, dias: int, valor: int) -> bool:
+    """Pergunta ao cliente se ele deseja alugar o carro escolhido.
+
+    Args:
+        chave (str): nome do carro
+        dias (int): quantidade de dias a ser alugado
+        valor (int): valor por dia do carro
+
+    Returns:
+        bool: se usuário confirmou ou não
+    """
+    print(f"Você escolheu {chave} por {dias} dias.")
+    print(f"O aluguel totalizaria R$ {valor * dias}.")
+    print("Deseja alugar?")
+    desistencia = input("0 - SIM | 1 - NÃO\n")
+    if desistencia not in ['0', '1']:
+        escolha_invalida()
+        return False
+    if desistencia == '1':
+        limpar_terminal()
+        return False
+    return True
+
+def transfere_carro(remetente: dict, destinatario:dict, chave:str) -> None:
+    """Essa função passa um carro do dicionário carros_disponiveis
+    para o dicionário carros_alugados."""
+    try:
+        valor = remetente.pop(chave, None)
+        destinatario[chave] = valor
+    except:
+        limpar_terminal()
+        input("Ocorreu um erro, pressione enter para continuar.")

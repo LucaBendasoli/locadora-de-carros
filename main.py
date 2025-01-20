@@ -1,7 +1,13 @@
 """Projeto Locadora de Carros"""
 # Autor: Luca Bendasoli
 
-from utils import limpar_terminal, escolha_invalida, escolhe_carro_para_alugar, carros_disponiveis
+from utils import (
+    monta_portifolio,
+    escolhe_carro_para_alugar,
+    escolhe_carro_para_devolver,
+    escolha_invalida,
+    limpar_terminal
+)
 
 def inicio():
     """Essa função chama a tela inicial do programa"""
@@ -14,7 +20,7 @@ def escolhe_opcao() -> None:
     escolha = input()
     try:
         if int(escolha) == 0:
-            mostrar_portifolio(True)
+            monta_portifolio("carros_disponiveis", main_func=True)
         elif int(escolha) == 1:
             alugar_um_carro()
         elif int(escolha) == 2:
@@ -24,34 +30,19 @@ def escolhe_opcao() -> None:
     except:
         escolha_invalida()
 
-def mostrar_portifolio(main_func: bool = False) -> None:
-    """Percorre um dicionário do portifolio e imprime os carros disponíveis
-    
-    Args:
-        main_func (bool, optional): Se a função está
-        sendo chamada pelo menu principal. Padrão é False."""
-    limpar_terminal()
-    for indice, (carro, valor) in enumerate(carros_disponiveis.items()):
-        print(f"[{indice}] {carro} - {valor}")
-    if main_func:
-        input("Pressione enter para voltar")
-        limpar_terminal()
-
 def alugar_um_carro() -> None:
     """Aluga um carro para o usuário e remove o carro
     do portifólio e adicona aos carros alugados."""
     limpar_terminal()
-    mostrar_portifolio()
-    print("Escolha o código do carro")
+    monta_portifolio("carros_disponiveis")
     escolhe_carro_para_alugar()
 
 def devolver_um_carro() -> None:
     """Devolve um carro para o portifólio de carros 
     disponíveis e remove dos carros alugados."""
     limpar_terminal()
-    print("Carro devolvido")
-    input("Pressione enter para voltar")
-    limpar_terminal()
+    monta_portifolio("carros_alugados")
+    escolhe_carro_para_devolver()
 
 if __name__ == '__main__':
     while True:
