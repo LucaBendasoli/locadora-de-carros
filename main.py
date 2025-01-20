@@ -24,7 +24,8 @@ def escolhe_opcao() -> None:
     
 def mostrar_portifolio() -> None:
     limpar_terminal()
-    print(carros_disponiveis)
+    for indice, (carro, valor) in enumerate(carros_disponiveis.items()):
+        print(f"[{indice}] {carro} - {valor}")
     input("Pressione enter para voltar")
     limpar_terminal()
     
