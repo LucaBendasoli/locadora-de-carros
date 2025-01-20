@@ -1,7 +1,7 @@
 """Projeto Locadora de Carros"""
 # Autor: Luca Bendasoli
 
-from utils import limpar_terminal, escolha_invalida, escolhe_carro, carros_disponiveis
+from utils import limpar_terminal, escolha_invalida, escolhe_carro_para_alugar, carros_disponiveis
 
 def inicio():
     """Essa função chama a tela inicial do programa"""
@@ -43,7 +43,7 @@ def alugar_um_carro() -> None:
     limpar_terminal()
     mostrar_portifolio()
     print("Escolha o código do carro")
-    escolhe_carro()
+    escolhe_carro_para_alugar()
 
 def devolver_um_carro() -> None:
     """Devolve um carro para o portifólio de carros 

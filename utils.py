@@ -15,7 +15,7 @@ carros_disponiveis = {
 
 carros_alugados = {}
 
-def escolhe_carro() -> None:
+def escolhe_carro_para_alugar() -> None:
     """Essa função permite que o usuário escolha um carro para alugar.
     A função irá validar a escolha do usuário e responder a sua solicitação."""
     escolha = input()
