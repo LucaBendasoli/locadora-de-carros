@@ -25,6 +25,9 @@ def escolhe_carro() -> None:
             escolha_invalida()
             return
         dias = int(input("Quantos dias você quer alugar este carro?\n"))
+        if int(dias) <= 0:
+            escolha_invalida()
+            return
         chave = list(carros_disponiveis.keys())[escolha]
         valor_por_dia = list(carros_disponiveis.values())[escolha].split()[1]
         valor = int(valor_por_dia.split("/")[0])
