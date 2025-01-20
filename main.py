@@ -13,7 +13,7 @@ def inicio():
     """Essa função chama a tela inicial do programa"""
     print("Bem vindo a Locadora de Carros!")
     print("O que deseja fazer?")
-    print("0 - Mostrar Porifólio | 1 - Alugar um carro | 2 - Devolver um carro" )
+    print("0 - Mostrar Porifólio | 1 - Alugar um carro | 2 - Devolver um carro | 3 - Mostrar carros alugados " )
 
 def escolhe_opcao() -> None:
     """Pede que o usuário escolha uma opção e chama a função correspondente"""
@@ -25,6 +25,8 @@ def escolhe_opcao() -> None:
             alugar_um_carro()
         elif int(escolha) == 2:
             devolver_um_carro()
+        elif int(escolha) == 3:
+            monta_portifolio("carros_alugados", main_func=True)
         else:
             escolha_invalida()
     except:

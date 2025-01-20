@@ -21,11 +21,16 @@ def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
     Args:
         main_func (bool, optional): Se a função está
         sendo chamada pelo menu principal. Padrão é False."""
+    limpar_terminal()
     if portifolio == "carros_alugados":
+        if len(carros_alugados) == 0:
+            print("Não há carros alugados no momento.")
+            input("Pressione enter para continuar.")
+            limpar_terminal()
+            return
         portifolio = carros_alugados
     if portifolio == "carros_disponiveis":
         portifolio = carros_disponiveis
-    limpar_terminal()
     for indice, (carro, valor) in enumerate(portifolio.items()):
         print(f"[{indice}] {carro} - {valor}")
     if main_func:
