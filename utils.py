@@ -51,6 +51,11 @@ def escolhe_carro_para_alugar() -> None:
 
 def escolhe_carro_para_devolver() -> None:
     """"Essa função permite ao usuário escolher um carro para devolver."""
+    if len(carros_alugados) == 0:
+        print("Não há carros alugados no momento.")
+        input("Pressione enter para continuar.")
+        limpar_terminal()
+        return
     escolha = input("Escolha o codigo do carro para devolve-lo\n")
     try:
         escolha = int(escolha)
