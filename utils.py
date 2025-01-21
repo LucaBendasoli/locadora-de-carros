@@ -24,12 +24,11 @@ def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
     limpar_terminal()
     if portifolio == "carros_alugados":
         if len(carros_alugados) == 0:
-            print("Não há carros alugados no momento.")
-            input("Pressione enter para continuar.")
-            limpar_terminal()
             return
         portifolio = carros_alugados
     if portifolio == "carros_disponiveis":
+        if len(carros_disponiveis) == 0:
+            return
         portifolio = carros_disponiveis
     for indice, (carro, valor) in enumerate(portifolio.items()):
         print(f"[{indice}] {carro} - {valor}")
@@ -39,6 +38,11 @@ def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
 
 def escolhe_carro_para_alugar() -> None:
     """Essa função permite que o usuário escolha um carro para alugar."""
+    if len(carros_disponiveis) == 0:
+        print("Não há carros disponíveis no momento.")
+        input("Pressione enter para continuar.")
+        limpar_terminal()
+        return
     escolha = int(input("Escolha o código do carro\n"))
     try:
         if not valida_escolha_do_carro(escolha, carros_disponiveis):
@@ -142,11 +146,11 @@ def cliente_confirmar(chave: str, dias: int, valor: int) -> bool:
     print(f"Você escolheu {chave} por {dias} dias.")
     print(f"O aluguel totalizaria R$ {valor * dias}.")
     print("Deseja alugar?")
-    desistencia = input("0 - SIM | 1 - NÃO\n")
+    desistencia = input("1 - SIM | 0 - NÃO\n")
     if desistencia not in ['0', '1']:
         escolha_invalida()
         return False
-    if desistencia == '1':
+    if desistencia == '0':
         limpar_terminal()
         return False
     return True

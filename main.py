@@ -1,6 +1,4 @@
 """
-TODO: se eu pressionar vazio no input apaga terminal e volta menu
-FIXME: otimizar funcoes (juntar as desnecessarias)
 TODO: adicionar funcao para cadastrar carro e registro de tudo em arquivo
 TODO: adicionar funcao para remover carro do registro
 TODO: adicionar funcao para editar carro do registro
