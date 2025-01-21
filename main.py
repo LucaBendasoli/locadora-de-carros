@@ -17,18 +17,23 @@ from utils import (
     limpar_terminal
 )
 
-def inicio():
-    """Essa função chama a tela inicial do programa"""
+def main() -> None:
+    """Função principal do programa.
+    Mostra o menu principal e chama as funções de acordo com a escolha do usuário.
+    
+    Options:
+    | 0 - Mostrar Porifólio | 1 - Alugar um carro         |
+    0=======================0=============================0
+    | 2 - Devolver um carro | 3 - Mostrar carros alugados |
+    """
     print("""
 Bem vindo a Locadora de Carros!
-O que deseja fazer?
-| 0 - Mostrar Porifólio | 1 - Alugar um carro |
------------------------------------------------
-| 2 - Devolver um carro | 3 - Mostrar carros alugados\n
-""")
 
-def escolhe_opcao() -> None:
-    """Pede que o usuário escolha uma opção e chama a função correspondente"""
+O que deseja fazer?
+| 0 - Mostrar Porifólio | 1 - Alugar um carro         |
+0=======================0=============================O
+| 2 - Devolver um carro | 3 - Mostrar carros alugados |\n
+""")
     escolha = input()
     try:
         if int(escolha) == 0:
@@ -60,5 +65,4 @@ def devolver_um_carro() -> None:
 
 if __name__ == '__main__':
     while True:
-        inicio()
-        escolhe_opcao()
+        main()
