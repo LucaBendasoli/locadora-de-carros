@@ -60,7 +60,7 @@ def escolhe_carro_para_alugar() -> None:
         dias = int(input("Quantos dias você quer alugar este carro?\n"))
         if not valida_dias_alugados(dias):
             return
-        chave, valor = obtem_info_do_carro(escolha, carros_disponiveis)
+        chave, valor = obtem_info_do_carro_cadastrado(escolha, carros_disponiveis)
         if cliente_confirmar(chave, dias, valor):
             transfere_carro(carros_disponiveis, carros_alugados, chave)
             limpar_terminal()
@@ -80,7 +80,7 @@ def escolhe_carro_para_devolver() -> None:
         escolha = int(escolha)
         if not valida_escolha_do_carro(escolha, carros_alugados):
             return
-        informacoes = obtem_info_do_carro(escolha, carros_alugados)
+        informacoes = obtem_info_do_carro_cadastrado(escolha, carros_alugados)
         transfere_carro(carros_alugados, carros_disponiveis, informacoes[0])
         limpar_terminal()
         print(f"Obrigado por devolver o carro: {informacoes[0]}.")
@@ -127,7 +127,7 @@ def valida_dias_alugados(dias: int) -> bool:
         return False
     return True
 
-def obtem_info_do_carro(escolha: int, portifolio: dict) -> tuple:
+def obtem_info_do_carro_cadastrado(escolha: int, portifolio: dict) -> tuple:
     """Obtém informações do carro escolhido pelo usuário.
 
     Args:
@@ -141,6 +141,30 @@ def obtem_info_do_carro(escolha: int, portifolio: dict) -> tuple:
     valor_por_dia = list(portifolio.values())[escolha].split()[1]
     valor = int(valor_por_dia.split("/")[0])
     return chave, valor
+
+def cadastrar_um_carro() -> None:
+    """Adiciona um carro ao portifólio de carros disponíveis."""
+    
+    limpar_terminal()
+    chave = input("""Você está prestes a cadastrar um novo carro.
+Escreva o nome do carro para continuar.\n""")
+    valor = input("""Qual o valor da diária deste carro?\n""")
+    try:
+        int(valor)
+        limpar_terminal()
+    except:
+        escolha_invalida()
+        return
+    confirmacao = int(input(f"""Você está cadastrando {chave} pelo valor de R$ {valor}/dia.
+| 1 - Confirmar | 0 - Cancelar |"""))
+    if not confirmacao in [0, 1]:
+        escolha_invalida()
+        return
+    if confirmacao == 0:
+        limpar_terminal()
+        return
+    carros_disponiveis[chave] = f"R$ {valor}/dia"
+    
 
 def cliente_confirmar(chave: str, dias: int, valor: int) -> bool:
     """Pergunta ao cliente se ele deseja alugar o carro escolhido.

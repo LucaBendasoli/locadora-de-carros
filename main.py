@@ -12,7 +12,8 @@ from utils import (
     escolhe_carro_para_alugar,
     escolhe_carro_para_devolver,
     escolha_invalida,
-    limpar_terminal
+    limpar_terminal,
+    cadastrar_um_carro
 )
 
 def main() -> None:
@@ -28,9 +29,9 @@ def main() -> None:
 Bem vindo a Locadora de Carros!
 
 O que deseja fazer?
-| 0 - Mostrar Porifólio | 1 - Alugar um carro         |
-0=======================0=============================O
-| 2 - Devolver um carro | 3 - Mostrar carros alugados |\n
+| 0 - Mostrar Porifólio |     1 - Alugar um carro     | 3 - Cadastrar um novo carro |
+0=======================0=============================O=============================0
+| 4 - Devolver um carro | 5 - Mostrar carros alugados |     Em desenvolvimento      |\n
 """)
     escolha = input()
     try:
@@ -42,6 +43,8 @@ O que deseja fazer?
             devolver_um_carro()
         elif int(escolha) == 3:
             monta_portifolio("carros_alugados", main_func=True)
+        elif int(escolha) == 4:
+            cadastrar_um_carro()
         else:
             escolha_invalida()
     except:
