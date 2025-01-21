@@ -1,6 +1,3 @@
-"""Projeto Locadora de Carros"""
-# Autor: Luca Bendasoli
-
 """
 TODO: se eu pressionar vazio no input apaga terminal e volta menu
 FIXME: otimizar funcoes (juntar as desnecessarias)
@@ -8,6 +5,9 @@ TODO: adicionar funcao para cadastrar carro e registro de tudo em arquivo
 TODO: adicionar funcao para remover carro do registro
 TODO: adicionar funcao para editar carro do registro
 """
+
+# Projeto Locadora de Carros
+# Autor: Luca Bendasoli
 
 from utils import (
     monta_portifolio,
@@ -43,8 +43,6 @@ def escolhe_opcao() -> None:
             escolha_invalida()
     except:
         escolha_invalida()
-
-
 
 def alugar_um_carro() -> None:
     """Aluga um carro para o usuário e remove o carro
