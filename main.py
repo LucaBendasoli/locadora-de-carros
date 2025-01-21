@@ -1,6 +1,14 @@
 """Projeto Locadora de Carros"""
 # Autor: Luca Bendasoli
 
+"""
+TODO: se eu pressionar vazio no input apaga terminal e volta menu
+FIXME: otimizar funcoes (juntar as desnecessarias)
+TODO: adicionar funcao para cadastrar carro e registro de tudo em arquivo
+TODO: adicionar funcao para remover carro do registro
+TODO: adicionar funcao para editar carro do registro
+"""
+
 from utils import (
     monta_portifolio,
     escolhe_carro_para_alugar,
@@ -11,11 +19,13 @@ from utils import (
 
 def inicio():
     """Essa função chama a tela inicial do programa"""
-    print("Bem vindo a Locadora de Carros!")
-    print("O que deseja fazer?")
-    print("| 0 - Mostrar Porifólio | 1 - Alugar um carro |")
-    print("-----------------------------------------------")
-    print("| 2 - Devolver um carro | 3 - Mostrar carros alugados" )
+    print("""
+Bem vindo a Locadora de Carros!
+O que deseja fazer?
+| 0 - Mostrar Porifólio | 1 - Alugar um carro |
+-----------------------------------------------
+| 2 - Devolver um carro | 3 - Mostrar carros alugados\n
+""")
 
 def escolhe_opcao() -> None:
     """Pede que o usuário escolha uma opção e chama a função correspondente"""
@@ -33,6 +43,8 @@ def escolhe_opcao() -> None:
             escolha_invalida()
     except:
         escolha_invalida()
+
+
 
 def alugar_um_carro() -> None:
     """Aluga um carro para o usuário e remove o carro
