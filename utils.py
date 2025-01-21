@@ -24,10 +24,20 @@ def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
     limpar_terminal()
     if portifolio == "carros_alugados":
         if len(carros_alugados) == 0:
+            if main_func:
+                input("""
+Não há carros alugados no momento.
+Pressione enter para voltar.""")
+            limpar_terminal()
             return
         portifolio = carros_alugados
     if portifolio == "carros_disponiveis":
         if len(carros_disponiveis) == 0:
+            if main_func:
+                input("""
+Não há carros disponíveis no momento.
+Pressione enter para continuar.""")
+                limpar_terminal()
             return
         portifolio = carros_disponiveis
     for indice, (carro, valor) in enumerate(portifolio.items()):
