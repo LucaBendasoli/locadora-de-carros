@@ -1,6 +1,5 @@
 """
 TODO: registrar tudo em arquivo
-TODO: adicionar funcao para remover carro do registro
 TODO: adicionar funcao para editar carro do registro
 """
 
@@ -12,7 +11,8 @@ from utils import (
     alugar_um_carro,
     devolver_um_carro,
     escolha_invalida,
-    cadastrar_um_carro
+    cadastrar_um_carro,
+    remover_um_carro
 )
 
 def main() -> None:
@@ -22,7 +22,7 @@ def main() -> None:
     Options:
     |    0 - Mostrar Porifólio    |  1 - Alugar um carro  | 2 - Cadastrar um novo carro |
     0=============================0=======================O=============================0
-    | 3 - Mostrar carros alugados | 4 - Devolver um carro |     Em desenvolvimento      |
+    | 3 - Mostrar carros alugados | 4 - Devolver um carro |    5 - Remover um carro     |
     """
     print("""
 Bem vindo a Locadora de Carros!
@@ -30,7 +30,7 @@ Bem vindo a Locadora de Carros!
 O que deseja fazer?
 |    0 - Mostrar Porifólio    |  1 - Alugar um carro  | 2 - Cadastrar um novo carro |
 0=============================0=======================O=============================0
-| 3 - Mostrar carros alugados | 4 - Devolver um carro |     Em desenvolvimento      |\n
+| 3 - Mostrar carros alugados | 4 - Devolver um carro |    5 - Remover um carro     |\n
 """)
     escolha = input()
     try:
@@ -44,6 +44,8 @@ O que deseja fazer?
             montar_portifolio("carros_alugados", main_func=True)
         elif int(escolha) == 4:
             devolver_um_carro()
+        elif int(escolha) == 5:
+            remover_um_carro()
         else:
             escolha_invalida()
     except:

@@ -179,6 +179,23 @@ Escreva o nome do carro para continuar.\n""")
         return
     carros_disponiveis[chave] = f"R$ {valor}/dia"
     
+def remover_um_carro() -> None:
+    """Remove um carro do porifólio de carros disponíveis."""
+    
+    limpar_terminal()
+    montar_portifolio("carros_disponiveis")
+    escolha = int(input("Escolha o código do carro que quer remover do sistema.\n"))
+    infos = obter_info_do_carro_cadastrado(escolha, carros_disponiveis)
+    confirmacao = int(input(f"""Tem certeza que quer remover {infos[0]} do sistema?
+1 - Confirmar | 0 - Cancelar\n"""))
+    if not confirmacao in [0, 1]:
+        escolha_invalida()
+        return
+    if confirmacao == 0:
+        limpar_terminal()
+        return
+    carros_disponiveis.pop(infos[0])
+    limpar_terminal()
 
 def confirmar(chave: str, dias: int, valor: int) -> bool:
     """Pergunta ao cliente se ele deseja alugar o carro escolhido.
