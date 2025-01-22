@@ -21,17 +21,17 @@ def main() -> None:
     Mostra o menu principal e chama as funções de acordo com a escolha do usuário.
     
     Options:
-    | 0 - Mostrar Porifólio | 1 - Alugar um carro         |
-    0=======================0=============================0
-    | 2 - Devolver um carro | 3 - Mostrar carros alugados |
+    |    0 - Mostrar Porifólio    |  1 - Alugar um carro  | 2 - Cadastrar um novo carro |
+    0=============================0=======================O=============================0
+    | 3 - Mostrar carros alugados | 4 - Devolver um carro |     Em desenvolvimento      |
     """
     print("""
 Bem vindo a Locadora de Carros!
 
 O que deseja fazer?
-| 0 - Mostrar Porifólio |     1 - Alugar um carro     | 3 - Cadastrar um novo carro |
-0=======================0=============================O=============================0
-| 4 - Devolver um carro | 5 - Mostrar carros alugados |     Em desenvolvimento      |\n
+|    0 - Mostrar Porifólio    |  1 - Alugar um carro  | 2 - Cadastrar um novo carro |
+0=============================0=======================O=============================0
+| 3 - Mostrar carros alugados | 4 - Devolver um carro |     Em desenvolvimento      |\n
 """)
     escolha = input()
     try:
@@ -40,17 +40,15 @@ O que deseja fazer?
         elif int(escolha) == 1:
             alugar_um_carro()
         elif int(escolha) == 2:
-            devolver_um_carro()
+            cadastrar_um_carro()
         elif int(escolha) == 3:
             montar_portifolio("carros_alugados", main_func=True)
         elif int(escolha) == 4:
-            cadastrar_um_carro()
+            devolver_um_carro()
         else:
             escolha_invalida()
     except:
         escolha_invalida()
-
-
 
 if __name__ == '__main__':
     while True:
