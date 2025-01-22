@@ -15,7 +15,7 @@ carros_disponiveis = {
 
 carros_alugados = {}
 
-def monta_portifolio(portifolio: str, main_func: bool = False) -> None:
+def montar_portifolio(portifolio: str, main_func: bool = False) -> None:
     """Percorre um dicionário do portifolio e imprime os carros disponíveis
     
     Args:
@@ -45,8 +45,22 @@ Pressione enter para continuar.""")
     if main_func:
         input("Pressione enter para voltar")
         limpar_terminal()
+        
+def alugar_um_carro() -> None:
+    """Aluga um carro para o usuário e remove o carro
+    do portifólio e adicona aos carros alugados."""
+    limpar_terminal()
+    montar_portifolio("carros_disponiveis")
+    escolher_carro_para_alugar()
 
-def escolhe_carro_para_alugar() -> None:
+def devolver_um_carro() -> None:
+    """Devolve um carro para o portifólio de carros 
+    disponíveis e remove dos carros alugados."""
+    limpar_terminal()
+    montar_portifolio("carros_alugados")
+    escolher_carro_para_devolver()
+
+def escolher_carro_para_alugar() -> None:
     """Essa função permite que o usuário escolha um carro para alugar."""
     if len(carros_disponiveis) == 0:
         print("Não há carros disponíveis no momento.")
@@ -55,20 +69,20 @@ def escolhe_carro_para_alugar() -> None:
         return
     escolha = int(input("Escolha o código do carro\n"))
     try:
-        if not valida_escolha_do_carro(escolha, carros_disponiveis):
+        if not validar_escolha_do_carro(escolha, carros_disponiveis):
             return
         dias = int(input("Quantos dias você quer alugar este carro?\n"))
-        if not valida_dias_alugados(dias):
+        if not validar_dias_alugados(dias):
             return
-        chave, valor = obtem_info_do_carro_cadastrado(escolha, carros_disponiveis)
-        if cliente_confirmar(chave, dias, valor):
-            transfere_carro(carros_disponiveis, carros_alugados, chave)
+        chave, valor = obter_info_do_carro_cadastrado(escolha, carros_disponiveis)
+        if confirmar(chave, dias, valor):
+            transferir_carro(carros_disponiveis, carros_alugados, chave)
             limpar_terminal()
             print(f"Parabéns você alugou o {chave} por {dias} dias.")
     except:
         escolha_invalida()
 
-def escolhe_carro_para_devolver() -> None:
+def escolher_carro_para_devolver() -> None:
     """"Essa função permite ao usuário escolher um carro para devolver."""
     if len(carros_alugados) == 0:
         print("Não há carros alugados no momento.")
@@ -78,10 +92,10 @@ def escolhe_carro_para_devolver() -> None:
     escolha = input("Escolha o codigo do carro para devolve-lo\n")
     try:
         escolha = int(escolha)
-        if not valida_escolha_do_carro(escolha, carros_alugados):
+        if not validar_escolha_do_carro(escolha, carros_alugados):
             return
-        informacoes = obtem_info_do_carro_cadastrado(escolha, carros_alugados)
-        transfere_carro(carros_alugados, carros_disponiveis, informacoes[0])
+        informacoes = obter_info_do_carro_cadastrado(escolha, carros_alugados)
+        transferir_carro(carros_alugados, carros_disponiveis, informacoes[0])
         limpar_terminal()
         print(f"Obrigado por devolver o carro: {informacoes[0]}.")
         input("Pressione enter para continuar.")
@@ -98,7 +112,7 @@ def limpar_terminal() -> None:
     """Essa função limpa o terminal."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def valida_escolha_do_carro(escolha: int, portifolio: dict) -> bool:
+def validar_escolha_do_carro(escolha: int, portifolio: dict) -> bool:
     """Valida a escolha do usuário para alugar um carro.
 
     Args:
@@ -113,7 +127,7 @@ def valida_escolha_do_carro(escolha: int, portifolio: dict) -> bool:
         return False
     return True
 
-def valida_dias_alugados(dias: int) -> bool:
+def validar_dias_alugados(dias: int) -> bool:
     """Valida a quantidade de dias que o usuário deseja alugar um carro.
 
     Args:
@@ -127,7 +141,7 @@ def valida_dias_alugados(dias: int) -> bool:
         return False
     return True
 
-def obtem_info_do_carro_cadastrado(escolha: int, portifolio: dict) -> tuple:
+def obter_info_do_carro_cadastrado(escolha: int, portifolio: dict) -> tuple:
     """Obtém informações do carro escolhido pelo usuário.
 
     Args:
@@ -166,7 +180,7 @@ Escreva o nome do carro para continuar.\n""")
     carros_disponiveis[chave] = f"R$ {valor}/dia"
     
 
-def cliente_confirmar(chave: str, dias: int, valor: int) -> bool:
+def confirmar(chave: str, dias: int, valor: int) -> bool:
     """Pergunta ao cliente se ele deseja alugar o carro escolhido.
 
     Args:
@@ -189,7 +203,7 @@ def cliente_confirmar(chave: str, dias: int, valor: int) -> bool:
         return False
     return True
 
-def transfere_carro(remetente: dict, destinatario:dict, chave:str) -> None:
+def transferir_carro(remetente: dict, destinatario:dict, chave:str) -> None:
     """Essa função passa um carro do dicionário carros_disponiveis
     para o dicionário carros_alugados."""
     try:
