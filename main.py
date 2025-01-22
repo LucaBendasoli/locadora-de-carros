@@ -9,10 +9,9 @@ TODO: adicionar funcao para editar carro do registro
 
 from utils import (
     montar_portifolio,
-    escolher_carro_para_alugar,
-    escolher_carro_para_devolver,
+    alugar_um_carro,
+    devolver_um_carro,
     escolha_invalida,
-    limpar_terminal,
     cadastrar_um_carro
 )
 
