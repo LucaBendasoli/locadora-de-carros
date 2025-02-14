@@ -58,6 +58,6 @@ O programa permite alugar, devolver, cadastrar e remover carros do portfólio.
 
 1. Faça um fork do projeto.
 2. Crie uma nova branch: `git checkout -b minha-nova-funcionalidade`
-3. Faça suas alterações e commit: `git commit -m 'Adiciona nova funcionalidade'`
+3. Faça suas alterações e commit: `git commit -m 'feat: adiciona nova funcionalidade'`
 4. Envie para o repositório remoto: `git push origin minha-nova-funcionalidade`
 5. Abra um Pull Request.
