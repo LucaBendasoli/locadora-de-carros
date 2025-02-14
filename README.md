@@ -1,7 +1,7 @@
 # Locadora de Carros
 
-Este é um projeto de terminal simples simples de uma locadora de carros, desenvolvido em Python.
-Durante o módulo de Python Basics do curso de machine learning que estou fazendo, foi sugerido a ideia deste projeto para praticar os fundamentos da linguagem Python.
+Este é um simples projeto de terminal, um software para uma locadora de carros desenvolvido em Python.
+Durante o módulo de Python Basics do curso de machine learning que estou fazendo, foi sugerido a ideia deste projeto para praticar os fundamentos da linguagem.
 O programa permite alugar, devolver, cadastrar e remover carros do portfólio.
 
 ## Estrutura do Projeto
